@@ -15,6 +15,11 @@ const index = (req, res) => {
     })
 }
 
+const create = (req, res) => {
+    return res.type("html").send('<h1>Ho ricevuto una richiesta POST</h1>');
+}
+
 module.exports = {
-    index
+    index,
+    create
 }

@@ -13,6 +13,7 @@ app.get('/', (req, res) => {
 });
 
 app.get('/posts', post_cotroller.index);
+app.post('/posts', post_cotroller.create)
 
 app.listen(port, () => {
     console.log('Server running on port ' + port);

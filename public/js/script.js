@@ -30,7 +30,7 @@ const printFeed = async () => {
         </div>
     `).join('');
 
-        postContainer.innerHTML = postsHTML;
+        postContainer.innerHTML += postsHTML;
     }
 }
 
