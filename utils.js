@@ -3,12 +3,21 @@ const fs = require('fs');
 
 
 
-const readJson = (fileName) => {
-    const filePath = path.join(__dirname, fileName + '.json');
-    const jsonContent = fs.readFileSync(filePath, 'utf8');
-    return JSON.parse(jsonContent);
+const readFile = (fileName, extension) => {
+    const filePath = path.join(__dirname, fileName + '.' + extension);
+    const fileContent = fs.readFileSync(filePath, 'utf8');
+    if (extension == 'json') return JSON.parse(fileContent);
+    return fileContent
 };
 
+const getPath = (fileName) => {
+    return path.join(__dirname, fileName)
+}
+
+
+
+
 module.exports = {
-    readJson
+    readFile,
+    getPath
 }

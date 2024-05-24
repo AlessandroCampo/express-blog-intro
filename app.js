@@ -3,12 +3,13 @@ const app = express();
 app.use(express.static('public'));
 const port = process.env.port || 3000;
 const post_cotroller = require('./controllers/posts.js')
+const utils = require('./utils.js')
 
 
 
 app.get('/', (req, res) => {
-    console.log('got a request woho!');
-    res.send('<h1>Benvenuto nel mio blog</h1>');
+    const htmlContent = utils.readFile('index', 'html');
+    res.send(htmlContent);
 });
 
 app.get('/posts', post_cotroller.index);

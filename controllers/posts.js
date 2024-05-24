@@ -4,11 +4,13 @@ const dbFileName = 'postsDb'
 const index = (req, res) => {
     res.format({
         "html": () => {
-            //momentary
-            return res.type("json").send(utils.readJson(dbFileName));
+            const htmlContent = utils.readFile('posts', 'html');
+            // const htmlPath = utils.getPath('index.html');
+            return res.type("html").send(htmlContent);
+            // return res.type("json").send(utils.readFile(dbFileName, 'json'));
         },
         "json": () => {
-            return res.type("json").send(utils.readJson(dbFileName));
+            return res.type("json").send(utils.readFile(dbFileName, 'json'));
         }
     })
 }
