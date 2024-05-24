@@ -16,7 +16,30 @@ const index = (req, res) => {
 }
 
 const create = (req, res) => {
-    return res.type("html").send('<h1>Ho ricevuto una richiesta POST</h1>');
+    const data = req.body;
+    const existingPosts = utils.readFile(dbFileName, 'json')
+    console.log(existingPosts);
+    const arrayOfTags = data.content.split(" ").reduce((acc, word) => {
+        if (word.startsWith('#')) {
+            return [...acc, word.slice(1)];
+        }
+        return acc;
+    }, []);
+    const newObject = {
+        title: data.title || 'No title for this post',
+        author: data.author || 'Author of this post is unkown',
+        content: data.content || '',
+        image: 'https://picsum.photos/200/300?random=4',
+        creation_date: new Date(),
+        tags: arrayOfTags || []
+    }
+    const newData = [...existingPosts, newObject];
+    const stringifiedData = JSON.stringify(newData);
+    utils.writeInFile(dbFileName, 'json', stringifiedData);
+
+
+    return res.redirect("/posts");
+
 }
 
 module.exports = {

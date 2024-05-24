@@ -14,10 +14,17 @@ const getPath = (fileName) => {
     return path.join(__dirname, fileName)
 }
 
+const writeInFile = function (fileName, extension, data) {
+    const filePath = path.join(__dirname, fileName + '.' + extension);
+    fs.writeFileSync(filePath, data);
+};
+
+
 
 
 
 module.exports = {
     readFile,
-    getPath
+    getPath,
+    writeInFile
 }
