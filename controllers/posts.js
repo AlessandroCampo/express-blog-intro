@@ -18,7 +18,7 @@ const index = (req, res) => {
 const create = (req, res) => {
     const data = req.body;
     const existingPosts = utils.readFile(dbFileName, 'json')
-    console.log(existingPosts);
+
     const arrayOfTags = data.content.split(" ").reduce((acc, word) => {
         if (word.startsWith('#')) {
             return [...acc, word.slice(1)];
@@ -29,7 +29,7 @@ const create = (req, res) => {
         title: data.title || 'No title for this post',
         author: data.author || 'Author of this post is unkown',
         content: data.content || '',
-        image: 'https://picsum.photos/200/300?random=4',
+        image: req.file ? `/uploads/${req.file.filename}` : 'https://picsum.photos/200/300?random=4',
         creation_date: new Date(),
         tags: arrayOfTags || []
     }
